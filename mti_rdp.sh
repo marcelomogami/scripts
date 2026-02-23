@@ -15,7 +15,7 @@ if ping -c 3 -W 2 "$RDP_HOST" > /dev/null 2>&1; then
     echo "Conexão ativa! Iniciando RDP..."
     #xfreerdp /f /multimon /monitors:2,1 /v:$REMOTO /u:$USUARIO /d:$DOMINIOI /p:"$SENHA" /gfx:avc444 /network:auto /cert:ignore /dynamic-resolution /gdi:sw +clipboard -grab-keyboard -grab-mouse
     #xfreerdp3 /f /multimon /monitors:2,1 /v:$REMOTO /u:$USUARIO /d:$DOMINIOI /p:"$SENHA" /network:auto /cert:ignore /dynamic-resolution /gdi:sw +clipboard -grab-mouse
-    xfreerdp3 /v:$RDP_HOST /u:$RDP_USER /d:$RDP_DOMAIN /p:"$RDP_PASS" /network:auto /cert:ignore /dynamic-resolution /gfx:avc444 +clipboard -grab-mouse > /dev/null 2>&1 &
+    xfreerdp3 /v:$RDP_HOST /u:$RDP_USER /d:$RDP_DOMAIN /p:"$RDP_PASS" /network:lan /cert:ignore /dynamic-resolution /gfx:avc444 -wallpaper +clipboard -grab-mouse > /dev/null 2>&1 &
 else
     notify-send "Erro de Conexão" "A máquina remota não respondeu ao ping. Verifique a VPN." --icon=network-error
 fi
