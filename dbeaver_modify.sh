@@ -5,7 +5,9 @@ export YDOTOOL_SOCKET="/run/user/$(id -u)/.ydotool_socket"
 
 
 # 3. Confirma o nome da janela que está no foco
-ACTIVE_TITLE=$(kdotool getactivewindow getwindowname)
+# ACTIVE_TITLE=$(kdotool getactivewindow getwindowname)
+WINDOW_ID=$(kdotool getactivewindow)
+ACTIVE_TITLE=$(kdotool getwindowname "$WINDOW_ID")
 
 if [[ "$ACTIVE_TITLE" == *"DBeaver"* ]]; then
 
@@ -56,4 +58,8 @@ if [[ "$ACTIVE_TITLE" == *"DBeaver"* ]]; then
     # 9. Fecha a aba atual (Ctrl + W)
     # Segura Ctrl (29) -> Aperta W (17) -> Solta W (17) -> Solta Ctrl (29)
     ydotool key 29:1 17:1 17:0 29:0
+else
+    # Se não for o DBeaver, o script encerra sem fazer nada,
+    # ignorando o clique acidental.
+    exit 0
 fi
